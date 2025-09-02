@@ -19,8 +19,8 @@ app.post('/users', (req,res)=>{
     knex.select("*").from("users").where("username","=",req.body.username)
     .then(data => {
       if( data.length <= 0 ){
-        res.status(501).send(req.body);
-
+        knex('users').insert(req.body)
+        .then(data => data != 0 ? res.status(201).send('201 - Account created') : res.status(500).send('500 - Unable to complete request'))
       } else { res.status(409).send("409 - Username already exists") }
     })
   }

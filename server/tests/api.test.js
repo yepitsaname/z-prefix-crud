@@ -51,7 +51,7 @@ describe('/users', ()=>{
       })
     })
 
-    test('should add a user', (done)=>{
+    test('should add a user if there are no problems', (done)=>{
       const user = {
         "first_name": "Bob",
         "last_name": "Rob",
