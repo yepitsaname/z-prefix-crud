@@ -71,3 +71,7 @@ describe('/users', ()=>{
     })
   })
 })
+
+afterAll(()=>{
+  api.closeServer();
+})

@@ -27,6 +27,9 @@ app.post('/users', (req,res)=>{
 
 })
 
-app.listen(port, ()=>{console.log(`Listening on port ${port}`)});
+let server = app.listen(port, ()=>{console.log(`Listening on port ${port}`)});
+app.closeServer = () => {
+  server.close();
+}
 
 module.exports = app;
