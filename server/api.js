@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const knexfile = require('./knexfile.js')[process.env.NODE_ENV||'development']
-const knex = require('knex')//(knexfile);
+const knex = require('knex')(require('./knexfile.js')[process.env.NODE_ENV||'development']);
 const port = 5050;
 
 const app = express();
@@ -11,7 +10,21 @@ app.use(express.json());
 app.get('/', (req,res)=>res.status(200).send('API is up'));
 
 app.post('/users', (req,res)=>{
-  res.status(501).send();
+  let keys = Object.keys(req.body);
+  if( keys.length != 4 ){
+    res.status(400).send('400 - Incorrect number of parameters');
+  } else if( !keys.includes("first_name") || !keys.includes("last_name") || !keys.includes("username") || !keys.includes("password") ){
+    res.status(400).send('400 - Incorrect parameters');
+  }else {
+    knex.select("*").from("users").where("username","=",req.body.username)
+    .then(data => {
+      if( data.length <= 0 ){
+        res.status(501).send(req.body);
+
+      } else { res.status(409).send("409 - Username already exists") }
+    })
+  }
+
 })
 
 app.listen(port, ()=>{console.log(`Listening on port ${port}`)});

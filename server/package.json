@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest --watch",
     "build": "npx knex migrate:rollback | npx knex migrate:latest",
+    "test-build": "npx knex migrate:rollback --env test && npx knex migrate:latest --env test && npx knex seed:run --env test",
     "start": "nodemon app.js"
   },
   "keywords": [
