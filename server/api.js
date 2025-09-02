@@ -24,7 +24,18 @@ app.post('/users', (req,res)=>{
       } else { res.status(409).send("409 - Username already exists") }
     })
   }
+})
 
+app.get('/users', (req,res)=>{
+  let keys = Object.keys(req.body);
+  if( keys.length != 2 ){
+    res.status(400).send('400 - Incorrect number of parameters');
+  } else if ( !keys.includes("username") || !keys.includes("password") ) {
+    res.status(400).send('400 - Incorrect parameters');
+  } else {
+    knex.raw(`SELECT * FROM users WHERE username = '${req.body.username}' AND password = '${req.body.password}'`)
+    .then( data => data.rowCount != 0 ? res.status(200).send() : res.status(404).send());
+  }
 })
 
 let server = app.listen(port, ()=>{console.log(`Listening on port ${port}`)});
