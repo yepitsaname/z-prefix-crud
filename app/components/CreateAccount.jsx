@@ -1,7 +1,19 @@
+import { payload_CreateUser, build_Post, fetch_Users } from "../utils/forms";
+
 export default function CreateAccount(){
+  /**
+   * Takes an event triggered by the form, converts it into JSON, and sends a submit request
+   * @param {Event} event
+   */
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const payload = payload_CreateUser(event.target);
+    const request = build_Post(payload);
+    fetch_Users(request);
+  }
 
   return (
-    <form>
+    <form onSubmit={(event)=>{handleSubmit(event)}}>
       <h2>Account Creation</h2>
       <label htmlFor="username">Username</label>
       <input type="text" id="username" name="username" placeholder="username" maxLength={16} />

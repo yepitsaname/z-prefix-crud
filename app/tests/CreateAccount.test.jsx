@@ -1,5 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import CreateAccount from "../components/CreateAccount";
+import { vi } from "vitest";
+
+global.fetch = vi.fn();
 
 describe("Create Account Functionality", ()=>{
   describe("UI", ()=>{
