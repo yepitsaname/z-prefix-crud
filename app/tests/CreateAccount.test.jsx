@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import CreateAccount from "../components/CreateAccount";
-import { vi } from "vitest";
+import { describe, vi } from "vitest";
 
 global.fetch = vi.fn();
 
@@ -35,5 +35,8 @@ describe("Create Account Functionality", ()=>{
     it("should have a cancel button", ()=>{
       expect(screen.getByText('Cancel')).toBeInTheDocument();
     })
+  })
+  describe("Functionality", ()=> {
+
   })
 })
