@@ -1,1 +1,2 @@
 # z-prefix-crud
+This application will allow an inventory manager to add, delete, modify, and view all items in their respective inventory. It will also allow all inventory managers and guests to view every item currently managed by the inventory system. Users will also be able to view the individual item details.
