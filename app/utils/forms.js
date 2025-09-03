@@ -49,8 +49,11 @@ export function build_Post (payload){
  */
 export function build_Get (payload){
   return {method: "GET",
-    headers: {"content-type": "application/json" },
-    body: JSON.stringify(payload)
+    headers: {
+      "content-type": "application/json",
+      "access-control-allow-credentials": true
+    },
+    credentials: "include"
   }
 }
 

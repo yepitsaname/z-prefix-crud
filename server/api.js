@@ -9,8 +9,9 @@ const {hash, compareHash, genJWT, decodeJWT} = require('./utils/auth');
 const app = express();
 app.use(cors(
   {
-    origin: true,
-    credentials: true
+    origin: 'http://localhost:5173',
+    credentials: true,
+    methods: 'POST, GET, PATCH, PUT, DELETE',
   }
 ));
 app.use(express.json());
@@ -34,7 +35,7 @@ app.post('/login', async (req,res)=>{
         res.cookie('jwt_auth',jwt, { httpOnly: false, sameSite: 'none', secure: 'true', domain: 'localhost'})
         res.setHeader('access-control-allow-credentials','true')
         res.setHeader('access-control-allow-origin','http://localhost:5173')
-        res.setHeader('access-control-allow-methods', 'POST')
+        res.setHeader('access-control-allow-methods', 'POST, GET, PATCH, PUT, DELETE')
         res.setHeader('access-control-allow-headers','Origin, X-Requested-With, Content-Type, Accept, Authorization')
         res.status(201)
         res.send();
@@ -74,19 +75,26 @@ app.get('/items', (req,res)=>{
   .catch(err => res.send(err))
 })
 
-app.get('/users/:account/items', async (req,res)=>{
+app.get('/users/:account/items', cors(), async (req,res)=>{
   if( !req.cookies.jwt_auth ){ return res.status(401).send() }
   knex.select('secret').from('users').where('username','=',req.params.account)
   .then(async data => {
     if( data.rowsCount == 0 ){ return res.status(401).send() }
     const decodedJWT = await decodeJWT(req.cookies.jwt_auth, data[0].secret);
-
     if( decodedJWT == null ){ return res.status(401).send() }
     if( decodedJWT.username != req.params.account ){ return res.status(401).send() }
+
     knex.select('*').from('items').where('user_id','=',
       knex.select('user_id').from('users').where('username','=',req.params.account)
     )
-    .then( data => res.status(200).send(data))
+    .then( data => {
+      res.status(200)
+      res.setHeader('access-control-allow-credentials','true')
+      res.setHeader('access-control-allow-origin','http://localhost:5173')
+      res.setHeader('access-control-allow-methods', 'POST, GET, PATCH, PUT, DELETE')
+      res.setHeader('access-control-allow-headers','Origin, X-Requested-With, Content-Type, Accept, Authorization')
+      res.send(data)
+  })
     .catch(err => res.send(err));
   })
 })
