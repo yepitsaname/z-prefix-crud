@@ -14,7 +14,6 @@ app.use(cookieParser())
 app.get('/', (req,res)=>res.status(200).send('API is up'));
 
 app.get('/users', async (req,res)=>{
-
   let keys = Object.keys(req.body);
   if( keys.length != 2 ){
     res.status(400).send('400 - Incorrect number of parameters');
@@ -66,6 +65,7 @@ app.get('/items', (req,res)=>{
 
 app.get('/users/:account/items', (req,res)=>{
   /* ADD SOME AUTH CHECKING HERE */
+  if( !req.cookies.jwt_auth ){ return res.status(401).send() } // Breaks my tests
   knex.select('*').from('items').where('user_id','=',
     knex.select('user_id').from('users').where('username','=',req.params.account)
   )
