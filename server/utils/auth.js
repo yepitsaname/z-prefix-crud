@@ -26,9 +26,12 @@
     • The account's hash is used as the secred
   6. The JWT is served to the user to access protected routes
 
+  *EXAMPLE*
   password: password
   hash: $2y$10$hEuSzZLDYstLyp0HaeUqTeuk327lXJZ13uP9l0YsgOwcvkgfGOIwy
 
+  There are definitely issues as the token doesnt expire nore is there a new secret key being generated at every log on. (Should probably do that?)
+  Should also make the tokens actually expire and validate based off of expiry
 */
 
 import bcrypt from 'bcrypt';
