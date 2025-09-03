@@ -3,21 +3,31 @@ const cors = require('cors');
 const knex = require('knex')(require('./knexfile.js')[process.env.NODE_ENV||'development']);
 const port = 5050;
 
+const {hash, compareHash, genJWT, decodeJWT} = require('./utils/auth.js')
+
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 app.get('/', (req,res)=>res.status(200).send('API is up'));
 
-app.get('/users', (req,res)=>{
+app.get('/users', async (req,res)=>{
+
   let keys = Object.keys(req.body);
   if( keys.length != 2 ){
     res.status(400).send('400 - Incorrect number of parameters');
   } else if ( !keys.includes("username") || !keys.includes("password") ) {
     res.status(400).send('400 - Incorrect parameters');
   } else {
-    knex.raw(`SELECT * FROM users WHERE username = '${req.body.username}' AND password = '${req.body.password}'`)
-    .then( data => data.rowCount != 0 ? res.status(200).send() : res.status(404).send());
+    knex.select('password', 'secret').from('users').where(knex.raw(`username='${req.body.username}'`))
+    .then(async data => {
+      if( data.rowsCount == 0 ){
+        res.status(404).send();
+      } else if(await compareHash(req.body.password, data[0].password)){
+        const jwt = await genJWT(req.body.username, data[0].secret);
+        res.status(200).send(jwt)
+      } else { res.status(401).send() }
+    })
   }
 })
 
@@ -29,9 +39,17 @@ app.post('/users', (req,res)=>{
     res.status(400).send('400 - Incorrect parameters');
   }else {
     knex.select("*").from("users").where("username","=",req.body.username)
-    .then(data => {
+    .then(async data => {
       if( data.length <= 0 ){
-        knex('users').insert(req.body)
+        const hashAndSecret = await hash(req.body.password);
+        const record = {
+          "first_name": req.body.first_name,
+          "last_name": req.body.last_name,
+          "username": req.body.username,
+          "password": hashAndSecret[0],
+          "secret": hashAndSecret[1]
+        }
+        knex('users').insert(record)
         .then(data => data != 0 ? res.status(201).send('201 - Account created') : res.status(500).send('500 - Unable to complete request'))
       } else { res.status(409).send("409 - Username already exists") }
     })

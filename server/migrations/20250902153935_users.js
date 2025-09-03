@@ -8,7 +8,8 @@ exports.up = function(knex) {
     table.string('first_name', 40); // Based off of UK Gov Data Standards Catalog of 35 characters
     table.string('last_name', 40); // Based off of UK Gov Data Standards Catalog of 35 characters
     table.string('username', 16); // Arbitrary limit
-    table.string('password',16);
+    table.string('password',256);
+    table.string('secret', 512);
   })
 };
 
