@@ -1,15 +1,25 @@
 import { payload_LoginUser, build_Post, fetch_Login } from "../utils/forms";
+import { useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import AppContext from "../src/AppContext";
 
 export default function Login(){
+  const {user, login} = useContext(AppContext);
+  const navigation = useNavigate();
+
   /**
    * Takes an event triggered by the form, converts it into JSON, and sends a submit request
    * @param {Event} event
    */
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const payload = payload_LoginUser(event.target);
     const request = build_Post(payload);
-    fetch_Login(request);
+    let result = await fetch_Login(request);
+    if( result ){
+      login(event.target[0].value);
+      navigation('/inventory');
+    } else { login(null) }
   }
 
   return (

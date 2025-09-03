@@ -67,11 +67,12 @@ export function fetch_CreateUser(request){
  * Takes a request and POSTs to the /login endpoint
  * @param {Object} request request parameters
  */
-export function fetch_Login(request){
-  fetch(`${URL}/login`,request)
+export async function fetch_Login(request){
+  return fetch(`${URL}/login`,request)
   .then(res => {
     if(res.status != 201){ throw new Error(res.statusText)}
-    console.log(res.headers.getSetCookie())
+    res.headers.getSetCookie()
+    return true;
   })
-  .catch(err => console.error(err));
+  .catch(err => false);
 }
