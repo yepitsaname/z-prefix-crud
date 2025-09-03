@@ -1,13 +1,15 @@
 const express = require('express');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const knex = require('knex')(require('./knexfile.js')[process.env.NODE_ENV||'development']);
 const port = 5050;
 
-const {hash, compareHash, genJWT, decodeJWT} = require('./utils/auth.js')
+const {hash, compareHash, genJWT, decodeJWT} = require('./utils/auth.js');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser())
 
 app.get('/', (req,res)=>res.status(200).send('API is up'));
 
@@ -25,7 +27,7 @@ app.get('/users', async (req,res)=>{
         res.status(404).send();
       } else if(await compareHash(req.body.password, data[0].password)){
         const jwt = await genJWT(req.body.username, data[0].secret);
-        res.status(200).send(jwt)
+        res.status(200).cookie("jwt_auth",jwt).send()
       } else { res.status(401).send() }
     })
   }
