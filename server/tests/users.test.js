@@ -132,6 +132,23 @@ describe('/users', ()=>{
       })
     })
   })
+
+  describe('GET /items', ()=>{
+    const testAccount = 'myguy'
+    test('should retrieve all items from a user', (done)=>{
+      request(api)
+      .get(`/users/${testAccount}/items/`)
+      .end((err,res)=>{
+        if(err) throw err;
+        expect(res.status).toEqual(200);
+        expect(res.body.length).toEqual(50);
+        done()
+      })
+    })
+    test('should return status 401 if attempting to access the wrong user\'s inventory', (done)=>{
+      done()
+    })
+  })
 })
 
 afterAll(()=>{

@@ -10,19 +10,8 @@ describe('/items', ()=>{
         if(err) throw err;
         expect(res.status).toEqual(200);
         expect(Object.keys(res.body).length).toEqual(150);
+        done();
       })
-    })
-  })
-
-  describe('GET :byUser', ()=>{
-    test('should retrieve all items from a user', (done)=>{
-      done()
-    })
-    test('should return status 401 if attempting to access the wrong user\'s inventory', (done)=>{
-      done()
-    })
-    test('should return a status 200 on success', (done)=>{
-      done()
     })
   })
 })

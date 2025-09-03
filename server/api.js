@@ -44,6 +44,14 @@ app.get('/items', (req,res)=>{
   .catch(err => res.send(err))
 })
 
+app.get('/users/:account/items', (req,res)=>{
+  /* ADD SOME AUTH CHECKING HERE */
+  knex.select('*').from('items').where('user_id','=',
+    knex.select('user_id').from('users').where('username','=',req.params.account)
+  )
+  .then( data => res.status(200).send(data))
+  .catch(err => res.send(err));
+})
 
 let server = app.listen(port, ()=>{console.log(`Listening on port ${port}`)});
 app.closeServer = () => {
