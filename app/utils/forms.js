@@ -1,3 +1,5 @@
+const URL = 'http://localhost:5050'
+
 /**
  * Takes event target data and transforms it into a useable payload
  * @param {Event.target} data
@@ -53,7 +55,7 @@ export function build_Get (payload){
  * @param {Object} request request parameters
  */
 export function fetch_CreateUser(request){
-  fetch('http://localhost:5050/users',request)
+  fetch(`${URL}/users`,request)
   .then(res => {
     if(res.status != 201){ throw new Error(res.statusText)}
   })
@@ -62,13 +64,14 @@ export function fetch_CreateUser(request){
 
 
 /**
- * Takes a request and GETs to the /users endpoint
+ * Takes a request and POSTs to the /login endpoint
  * @param {Object} request request parameters
  */
 export function fetch_Login(request){
-  fetch('http://localhost:5050/users',request)
+  fetch(`${URL}/login`,request)
   .then(res => {
     if(res.status != 201){ throw new Error(res.statusText)}
+    console.log(res.headers.getSetCookie())
   })
   .catch(err => console.error(err));
 }

@@ -7,13 +7,13 @@ const port = 5050;
 const {hash, compareHash, genJWT, decodeJWT} = require('./utils/auth');
 
 const app = express();
-app.use(cors());
+app.use(cors({credentials: true}));
 app.use(express.json());
 app.use(cookieParser())
 
 app.get('/', (req,res)=>res.status(200).send('API is up'));
 
-app.get('/users', async (req,res)=>{
+app.post('/login', async (req,res)=>{
   let keys = Object.keys(req.body);
   if( keys.length != 2 ){
     res.status(400).send('400 - Incorrect number of parameters');
@@ -26,7 +26,11 @@ app.get('/users', async (req,res)=>{
         res.status(404).send();
       } else if(await compareHash(req.body.password, data[0].password)){
         const jwt = await genJWT(req.body.username, data[0].secret);
-        res.status(200).cookie("jwt_auth",jwt).send()
+        res.writeHead(201, {
+          "set-cookie": `jwt_auth=${jwt};`,
+          "access-control-allow-credentials": "true"
+        }).send();
+        // res.status(201).header("Set-Cookie").cookie("jwt_auth",jwt).send()
       } else { res.status(401).send() }
     })
   }

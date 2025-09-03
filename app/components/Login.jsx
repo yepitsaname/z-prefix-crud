@@ -1,4 +1,4 @@
-import { payload_LoginUser, build_Get, fetch_Users } from "../utils/forms";
+import { payload_LoginUser, build_Post, fetch_Login } from "../utils/forms";
 
 export default function Login(){
   /**
@@ -8,8 +8,8 @@ export default function Login(){
   const handleSubmit = (event) => {
     event.preventDefault();
     const payload = payload_LoginUser(event.target);
-    const request = build_Get(payload);
-    fetch_Users(request);
+    const request = build_Post(payload);
+    fetch_Login(request);
   }
 
   return (
