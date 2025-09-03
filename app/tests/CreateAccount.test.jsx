@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import CreateAccount from "../components/CreateAccount";
-import { describe, vi } from "vitest";
+import { describe, it, vi } from "vitest";
 
 global.fetch = vi.fn();
 
@@ -37,6 +37,6 @@ describe("Create Account Functionality", ()=>{
     })
   })
   describe("Functionality", ()=> {
-
+    it("", ()=>{})
   })
 })
