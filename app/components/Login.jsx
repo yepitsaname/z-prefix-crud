@@ -16,6 +16,7 @@ export default function Login(){
     const payload = payload_LoginUser(event.target);
     const request = build_Post(payload);
     let result = await fetch_Login(request);
+    console.log(result);
     if( result ){
       login(event.target[0].value);
       navigation('/inventory');

@@ -33,7 +33,11 @@ export function payload_LoginUser(data){
  */
 export function build_Post (payload){
   return {method: "POST",
-    headers: {"content-type": "application/json" },
+    headers: {
+      "content-type": "application/json",
+      "access-control-allow-credentials": true
+    },
+    credentials: "include",
     body: JSON.stringify(payload)
   }
 }
@@ -70,6 +74,7 @@ export function fetch_CreateUser(request){
 export async function fetch_Login(request){
   return fetch(`${URL}/login`,request)
   .then(res => {
+    console.log(res.status);
     if(res.status != 201){ throw new Error(res.statusText)}
     res.headers.getSetCookie()
     return true;

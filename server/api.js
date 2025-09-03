@@ -7,7 +7,12 @@ const port = 5050;
 const {hash, compareHash, genJWT, decodeJWT} = require('./utils/auth');
 
 const app = express();
-app.use(cors({credentials: true}));
+app.use(cors(
+  {
+    origin: true,
+    credentials: true
+  }
+));
 app.use(express.json());
 app.use(cookieParser())
 
@@ -26,11 +31,13 @@ app.post('/login', async (req,res)=>{
         res.status(404).send();
       } else if(await compareHash(req.body.password, data[0].password)){
         const jwt = await genJWT(req.body.username, data[0].secret);
-        res.writeHead(201, {
-          "set-cookie": `jwt_auth=${jwt};`,
-          "access-control-allow-credentials": "true"
-        }).send();
-        // res.status(201).header("Set-Cookie").cookie("jwt_auth",jwt).send()
+        res.cookie('jwt_auth',jwt, { httpOnly: false, sameSite: 'none', secure: 'true', domain: 'localhost'})
+        res.setHeader('access-control-allow-credentials','true')
+        res.setHeader('access-control-allow-origin','http://localhost:5173')
+        res.setHeader('access-control-allow-methods', 'POST')
+        res.setHeader('access-control-allow-headers','Origin, X-Requested-With, Content-Type, Accept, Authorization')
+        res.status(201)
+        res.send();
       } else { res.status(401).send() }
     })
   }
@@ -68,7 +75,6 @@ app.get('/items', (req,res)=>{
 })
 
 app.get('/users/:account/items', async (req,res)=>{
-  /* ADD SOME AUTH CHECKING HERE */
   if( !req.cookies.jwt_auth ){ return res.status(401).send() }
   knex.select('secret').from('users').where('username','=',req.params.account)
   .then(async data => {
