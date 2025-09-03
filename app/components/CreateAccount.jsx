@@ -1,4 +1,4 @@
-import { payload_CreateUser, build_Post, fetch_Users } from "../utils/forms";
+import { payload_CreateUser, build_Post, fetch_CreateUser} from "../utils/forms";
 
 export default function CreateAccount(){
   /**
@@ -9,7 +9,7 @@ export default function CreateAccount(){
     event.preventDefault();
     const payload = payload_CreateUser(event.target);
     const request = build_Post(payload);
-    fetch_Users(request);
+    fetch_CreateUser(request);
   }
 
   return (

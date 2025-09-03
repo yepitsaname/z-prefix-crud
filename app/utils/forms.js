@@ -1,5 +1,3 @@
-
-
 /**
  * Takes event target data and transforms it into a useable payload
  * @param {Event.target} data
@@ -11,6 +9,18 @@ export function payload_CreateUser(data){
     "last_name": data[2].value,
     "username": data[0].value,
     "password": data[4].value
+  }
+}
+
+/**
+ * Takes event target data and transforms it into a useable payload
+ * @param {Event.target} data
+ * @returns a user login object in JSON
+ */
+export function payload_LoginUser(data){
+  return {
+    "username": data[0].value,
+    "password": data[1].value
   }
 }
 
@@ -27,10 +37,35 @@ export function build_Post (payload){
 }
 
 /**
- * Takes a request [optional] and either GETs or POSTs to the /users endpoint
+ * Takes in a JSON formatted payload
+ * @param {JSON} payload
+ * @returns a GET request with a jsonified payload
+ */
+export function build_Get (payload){
+  return {method: "GET",
+    headers: {"content-type": "application/json" },
+    body: JSON.stringify(payload)
+  }
+}
+
+/**
+ * Takes a request and POSTs to the /users endpoint
  * @param {Object} request request parameters
  */
-export function fetch_Users(request={}){
+export function fetch_CreateUser(request){
+  fetch('http://localhost:5050/users',request)
+  .then(res => {
+    if(res.status != 201){ throw new Error(res.statusText)}
+  })
+  .catch(err => console.error(err));
+}
+
+
+/**
+ * Takes a request and GETs to the /users endpoint
+ * @param {Object} request request parameters
+ */
+export function fetch_Login(request){
   fetch('http://localhost:5050/users',request)
   .then(res => {
     if(res.status != 201){ throw new Error(res.statusText)}
