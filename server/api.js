@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const knex = require('knex')(require('./knexfile.js')[process.env.NODE_ENV||'development']);
 const port = 5050;
 
-const {hash, compareHash, genJWT, decodeJWT} = require('./utils/auth.js');
+const {hash, compareHash, genJWT, decodeJWT} = require('./utils/auth');
 
 const app = express();
 app.use(cors());
@@ -63,14 +63,22 @@ app.get('/items', (req,res)=>{
   .catch(err => res.send(err))
 })
 
-app.get('/users/:account/items', (req,res)=>{
+app.get('/users/:account/items', async (req,res)=>{
   /* ADD SOME AUTH CHECKING HERE */
-  if( !req.cookies.jwt_auth ){ return res.status(401).send() } // Breaks my tests
-  knex.select('*').from('items').where('user_id','=',
-    knex.select('user_id').from('users').where('username','=',req.params.account)
-  )
-  .then( data => res.status(200).send(data))
-  .catch(err => res.send(err));
+  if( !req.cookies.jwt_auth ){ return res.status(401).send() }
+  knex.select('secret').from('users').where('username','=',req.params.account)
+  .then(async data => {
+    if( data.rowsCount == 0 ){ return res.status(401).send() }
+    const decodedJWT = await decodeJWT(req.cookies.jwt_auth, data[0].secret);
+
+    if( decodedJWT == null ){ return res.status(401).send() }
+    if( decodedJWT.username != req.params.account ){ return res.status(401).send() }
+    knex.select('*').from('items').where('user_id','=',
+      knex.select('user_id').from('users').where('username','=',req.params.account)
+    )
+    .then( data => res.status(200).send(data))
+    .catch(err => res.send(err));
+  })
 })
 
 let server = app.listen(port, ()=>{console.log(`Listening on port ${port}`)});

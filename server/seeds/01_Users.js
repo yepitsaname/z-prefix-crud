@@ -1,4 +1,4 @@
-const {hash} = require('../utils/auth.js');
+const {hash} = require('../utils/auth');
 
 /**
  * @param { import("knex").Knex } knex
