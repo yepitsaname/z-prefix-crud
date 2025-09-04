@@ -69,6 +69,18 @@ app.post('/users', (req,res)=>{
   }
 })
 
+app.get('/users/:account', async (req,res)=>{
+  if(!req.cookies.jwt_auth ){ return res.status(401).send()}
+  knex.select('secret','first_name','last_name').from('users').where('username','=',req.params.account)
+  .then( async data => {
+    if(data.length == 0){ return res.status(401).send() };
+    const decodedJWT = await decodeJWT(req.cookies.jwt_auth, data[0].secret);
+    if(decodedJWT == null){ return res.status(401).send() };
+    if(decodedJWT.username != req.params.account){ return res.status(401).send() };
+    res.status(200).json({"first_name": data[0].first_name, "last_name": data[0].last_name});
+  })
+})
+
 app.get('/users/:account/items', async (req,res)=>{
   if( !req.cookies.jwt_auth ){ return res.status(401).send() }
   knex.select('secret').from('users').where('username','=',req.params.account)
@@ -159,7 +171,6 @@ app.delete('/users/:account/items', (req,res)=>{
   if(!keys.includes("item_id")){ return res.status(400).send('400 - Incorrect parameters')}
   knex.select('secret','user_id').from('users').where('username','=',req.params.account)
   .then( async data => {
-    console.log(data);
     if(data.length == 0){ return res.status(401).send() };
     const decodedJWT = await decodeJWT(req.cookies.jwt_auth, data[0].secret);
     if(decodedJWT == null){ return res.status(401).send() };

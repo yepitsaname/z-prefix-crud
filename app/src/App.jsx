@@ -13,9 +13,10 @@ import Home from "./Home";
 
 export default function App() {
   const [user, setUser] = useState(null)
+  const [name, setName] = useState({first: null, last: null})
 
   return (
-    <AppContext.Provider value={{user: user, login: setUser}}>
+    <AppContext.Provider value={{user: user, login: setUser, name: name, setName: setName}}>
       <TopNav />
 
       <Routes>

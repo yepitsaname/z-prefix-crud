@@ -153,6 +153,19 @@ export async function fetch_Login(request){
 }
 
 /**
+ * Takes a request and GETs to the /users/:account endpoint
+ * @param {Object} request request parameters
+ */
+export async function fetch_Account(request, user){
+  return fetch(`${URL}/users/${user}`,request)
+  .then(res => {
+    if(res.status != 200){ throw new Error(res.statusText)}
+    return res.json();
+  })
+  .catch(err => err);
+}
+
+/**
  * Takes a request and POSTs to the /users/:user/items endpoint
  * @param {Object} request request parameters
  */

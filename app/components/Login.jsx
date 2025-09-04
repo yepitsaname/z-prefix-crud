@@ -1,10 +1,10 @@
-import { payload_LoginUser, build_Post, fetch_Login } from "../utils/forms";
+import { payload_LoginUser, build_Post, fetch_Login, build_Get, fetch_Account } from "../utils/forms";
 import { useNavigate } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import AppContext from "../src/AppContext";
 
 export default function Login(){
-  const {user, login} = useContext(AppContext);
+  const {login, setName} = useContext(AppContext);
   const navigation = useNavigate();
 
   /**
@@ -17,7 +17,9 @@ export default function Login(){
     const request = build_Post(payload);
     let result = await fetch_Login(request);
     if( result ){
+      let user = await fetch_Account(build_Get(),event.target[0].value)
       login(event.target[0].value);
+      setName({first: user.first_name, last: user.last_name})
       navigation('/inventory');
     } else { login(null) }
   }

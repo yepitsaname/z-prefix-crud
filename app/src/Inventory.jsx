@@ -4,7 +4,7 @@ import AppContext from "./AppContext";
 import { useNavigate } from "react-router-dom";
 
 export default function Inventory(){
-  const {user} = useContext(AppContext);
+  const {user, name} = useContext(AppContext);
   const navigation = useNavigate()
   const [items, setItems] = useState([]);
 
@@ -22,6 +22,7 @@ export default function Inventory(){
 
   return (
     <>
+      <h3>{name.first} Inventory</h3>
       {items.map(item=><Item key={item.item_id} item={item} />)}
     </>
   )
