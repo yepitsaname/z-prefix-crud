@@ -38,7 +38,7 @@ export default function CreateAccount(){
           <span className="tooltip">help?</span>
           <span className="tooltip-text">a-z,A-Z,' only; 16 characters max</span>
         </label>
-        <input type="text" id="name" name="item name" placeholder="Item name..." maxLength={16}/><br/>
+        <input type="text" id="name" name="item name" placeholder="Item name..." maxLength={16} /><br/>
       </div>
 
       <label htmlFor="description">Description</label>
