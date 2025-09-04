@@ -148,7 +148,26 @@ app.put('/users/:account/items', (req,res)=>{
     }
 
     knex('items').where("item_id","=",req.body.item_id).update(record,["item_id"])
-    .then( data != 0 ? res.status(201).send('Item updated') : res.status(500).send('Unable to update item'))
+    .then(data => data != 0 ? res.status(201).send('Item updated') : res.status(500).send('Unable to update item'))
+  })
+})
+
+app.delete('/users/:account/items', (req,res)=>{
+  console.log('hellow')
+  if(!req.cookies.jwt_auth ){ return res.status(401).send()}
+  const keys = Object.keys(req.body);
+  if(keys.length != 1){ return res.status(400).send('400 - Incorrect Number of Parameters')}
+  if(!keys.includes("item_id")){ return res.status(400).send('400 - Incorrect parameters')}
+
+  knex.select('secret','user_id').from('users').where('username','=',req.params.account)
+  .then( async data => {
+    if(data.rowsCount == 0){ return res.status(401).send() };
+    const decodedJWT = await decodeJWT(req.cookies.jwt_auth, data[0].secret);
+    if(decodedJWT == null){ return res.status(401).send() };
+    if(decodedJWT.username != req.params.account){ return res.status(401).send() };
+
+    knex('items').where("item_id","=",req.body.item_id).andWhere("user_id","=", data[0].user_id).del(['item_id'])
+    .then(data => data != 0 ? res.status(204).send('Item deleted') : res.status(500).send('Unable to find or delete item'))
   })
 })
 
@@ -157,8 +176,6 @@ app.get('/items', (req,res)=>{
   .then( data => res.status(200).send(data))
   .catch(err => res.send(err))
 })
-
-
 
 let server = app.listen(port, ()=>{console.log(`Listening on port ${port}`)});
 app.closeServer = () => {
