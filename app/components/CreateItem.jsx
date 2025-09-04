@@ -1,6 +1,18 @@
 import { payload_CreateItem, build_Post, fetch_CreateItem} from "../utils/forms";
+import { useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import AppContext from "../src/AppContext";
 
 export default function CreateAccount(){
+  const {user} = useContext(AppContext)
+  const navigation = useNavigate()
+
+  useEffect(()=>{
+    if( user == null ){
+      navigation('/')
+    }
+  },[])
+
   /**
    * Takes an event triggered by the form, converts it into JSON, and sends a submit request
    * @param {Event} event
@@ -9,7 +21,7 @@ export default function CreateAccount(){
     event.preventDefault();
     const payload = payload_CreateItem(event.target);
     const request = build_Post(payload);
-    fetch_CreateItem(request);
+    fetch_CreateItem(request,user);
   }
 
   return (

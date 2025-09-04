@@ -15,6 +15,7 @@ export default function TopNav(){
       <Link to="/">Home</Link>
       {loggedIn ? (<>
         <Link to={"/inventory"}>Inventory</Link>
+        <Link to={"/inventory/add-item"}>Add an Item</Link>
       </>) : (<>
         <Link to="/login">Login</Link>
         <Link to="/create-account">Create Account</Link>

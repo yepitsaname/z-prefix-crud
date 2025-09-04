@@ -12,8 +12,6 @@ export default function Inventory(){
     if( user == null ){
       navigation('/')
     } else {
-      let jwt = document.cookie.split("; ").find((row) => row.startsWith("jwt_auth="));
-
       fetch(`http://localhost:5050/users/${user}/items`, {
         headers:{'access-control-allow-origin': 'http://localhost:5173'}, credentials: 'include'})
       .then(res => res.json())
