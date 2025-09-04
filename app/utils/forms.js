@@ -17,6 +17,18 @@ export function payload_CreateUser(data){
 /**
  * Takes event target data and transforms it into a useable payload
  * @param {Event.target} data
+ * @returns a user login object in JSON
+ */
+export function payload_LoginUser(data){
+  return {
+    "username": data[0].value,
+    "password": data[1].value
+  }
+}
+
+/**
+ * Takes event target data and transforms it into a useable payload
+ * @param {Event.target} data
  * @returns a create user object in JSON
  */
 export function payload_CreateItem(data){
@@ -30,12 +42,28 @@ export function payload_CreateItem(data){
 /**
  * Takes event target data and transforms it into a useable payload
  * @param {Event.target} data
- * @returns a user login object in JSON
+ * @returns a create user object in JSON
  */
-export function payload_LoginUser(data){
+export function payload_UpdateItem(data, id){
   return {
-    "username": data[0].value,
-    "password": data[1].value
+    "item_id": id,
+    "name": data[0].value,
+    "description": data[1].value,
+    "quantity": data[2].value
+  }
+}
+
+/**
+ * Builds a get request
+ * @returns a GET request with a jsonified payload
+ */
+export function build_Get (){
+  return {method: "GET",
+    headers: {
+      "content-type": "application/json",
+      "access-control-allow-credentials": true
+    },
+    credentials: "include"
   }
 }
 
@@ -58,15 +86,16 @@ export function build_Post (payload){
 /**
  * Takes in a JSON formatted payload
  * @param {JSON} payload
- * @returns a GET request with a jsonified payload
+ * @returns a POST request with a jsonified payload
  */
-export function build_Get (payload){
-  return {method: "GET",
+export function build_Put (payload){
+  return {method: "PUT",
     headers: {
       "content-type": "application/json",
       "access-control-allow-credentials": true
     },
-    credentials: "include"
+    credentials: "include",
+    body: JSON.stringify(payload)
   }
 }
 
@@ -97,13 +126,26 @@ export async function fetch_Login(request){
 }
 
 /**
- * Takes a request and POSTs to the /users endpoint
+ * Takes a request and POSTs to the /users/:user/items endpoint
  * @param {Object} request request parameters
  */
 export async function fetch_CreateItem(request, user){
   return fetch(`${URL}/users/${user}/items`,request)
   .then(res => {
     if(res.status != 201){ throw new Error(res.statusText)}
+    return true;
+  })
+  .catch(err => err);
+}
+
+/**
+ * Takes a request and PUTs to the /users/:user/items endpoint
+ * @param {Object} request request parameters
+ */
+export async function fetch_UpdateItem(request, user){
+  return fetch(`${URL}/users/${user}/items`,request)
+  .then(res => {
+    if(res.status != 204){ throw new Error(res.statusText)}
     return true;
   })
   .catch(err => err);

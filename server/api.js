@@ -69,7 +69,7 @@ app.post('/users', (req,res)=>{
   }
 })
 
-app.get('/users/:account/items', cors(), async (req,res)=>{
+app.get('/users/:account/items', async (req,res)=>{
   if( !req.cookies.jwt_auth ){ return res.status(401).send() }
   knex.select('secret').from('users').where('username','=',req.params.account)
   .then(async data => {
@@ -120,6 +120,37 @@ app.post('/users/:account/items', (req,res)=>{
 
     knex('items').insert(record)
     .then( data != 0 ? res.status(201).send('Item created') : res.status(500).send('Unable to create item'))
+  })
+})
+
+app.put('/users/:account/items', (req,res)=>{
+  if(!req.cookies.jwt_auth ){ return res.status(401).send()}
+  console.log(Object.keys(req.body))
+  const keys = Object.keys(req.body);
+  if(keys.length != 4){ return res.status(400).send('400 - Incorrect Number of Parameters')}
+  console.log('h')
+  if(
+    !keys.includes("item_id") ||
+    !keys.includes("name") ||
+    !keys.includes("description") ||
+    !keys.includes("quantity")
+  ){ return res.status(400).send('400 - Incorrect parameters')}
+
+  knex.select('secret','user_id').from('users').where('username','=',req.params.account)
+  .then( async data => {
+    if(data.rowsCount == 0){ return res.status(401).send() };
+    const decodedJWT = await decodeJWT(req.cookies.jwt_auth, data[0].secret);
+    if(decodedJWT == null){ return res.status(401).send() };
+    if(decodedJWT.username != req.params.account){ return res.status(401).send() };
+
+    const record = {
+      "name": req.body.name,
+      "description": req.body.description,
+      "quantity": req.body.quantity
+    }
+
+    knex('items').where("item_id","=",req.body.item_id).update(record,["item_id"])
+    .then( data != 0 ? res.status(201).send('Item updated') : res.status(500).send('Unable to update item'))
   })
 })
 

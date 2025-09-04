@@ -1,6 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import '../css/item.css';
 
 export default function Item({item}){
+  const navigator = useNavigate();
+  const clickHandler = () => {
+    navigator('/inventory/item?' + encodeURI(JSON.stringify(item)))
+  }
+
 /**
  * @param {string} description
  */
@@ -22,7 +28,7 @@ const trimDescription = (description) => {
  * @property {number} quantity
  */
   return (
-    <div className='item'>
+    <div className='item' onClick={()=>{ clickHandler() }}>
       <p className='id'>{item.item_id}</p>
       <p className='name'>{item.name}</p>
       <p className="description">{trimDescription(item.description)}</p>
