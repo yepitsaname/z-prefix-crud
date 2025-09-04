@@ -26,7 +26,6 @@ export default function ItemView(){
   const handleSubmit = async (event) => {
     event.preventDefault();
     const payload = payload_UpdateItem(event.target,item.item_id);
-    console.log(payload)
     const request = build_Put(payload);
     let result = await fetch_UpdateItem(request,user)
     if( result ){

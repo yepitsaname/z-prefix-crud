@@ -125,10 +125,8 @@ app.post('/users/:account/items', (req,res)=>{
 
 app.put('/users/:account/items', (req,res)=>{
   if(!req.cookies.jwt_auth ){ return res.status(401).send()}
-  console.log(Object.keys(req.body))
   const keys = Object.keys(req.body);
   if(keys.length != 4){ return res.status(400).send('400 - Incorrect Number of Parameters')}
-  console.log('h')
   if(
     !keys.includes("item_id") ||
     !keys.includes("name") ||
