@@ -54,6 +54,17 @@ export function payload_UpdateItem(data, id){
 }
 
 /**
+ * Takes event target data and transforms it into a useable payload
+ * @param {number} data id of item to be deleted
+ * @returns a create user object in JSON
+ */
+export function payload_DeleteItem(id){
+  return {
+    "item_id": id
+  }
+}
+
+/**
  * Builds a get request
  * @returns a GET request with a jsonified payload
  */
@@ -86,10 +97,26 @@ export function build_Post (payload){
 /**
  * Takes in a JSON formatted payload
  * @param {JSON} payload
- * @returns a POST request with a jsonified payload
+ * @returns a PUT request with a jsonified payload
  */
 export function build_Put (payload){
   return {method: "PUT",
+    headers: {
+      "content-type": "application/json",
+      "access-control-allow-credentials": true
+    },
+    credentials: "include",
+    body: JSON.stringify(payload)
+  }
+}
+
+/**
+ * Takes in a JSON formatted payload
+ * @param {JSON} payload
+ * @returns a DELETE request with a jsonified payload
+ */
+export function build_Delete (payload){
+  return {method: "DELETE",
     headers: {
       "content-type": "application/json",
       "access-control-allow-credentials": true
@@ -143,6 +170,19 @@ export async function fetch_CreateItem(request, user){
  * @param {Object} request request parameters
  */
 export async function fetch_UpdateItem(request, user){
+  return fetch(`${URL}/users/${user}/items`,request)
+  .then(res => {
+    if(res.status != 204){ throw new Error(res.statusText)}
+    return true;
+  })
+  .catch(err => err);
+}
+
+/**
+ * Takes a request and DELETEs to the /users/:user/items endpoint
+ * @param {Object} request request parameters
+ */
+export async function fetch_DeleteItem(request, user){
   return fetch(`${URL}/users/${user}/items`,request)
   .then(res => {
     if(res.status != 204){ throw new Error(res.statusText)}

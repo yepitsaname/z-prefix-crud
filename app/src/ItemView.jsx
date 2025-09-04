@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { payload_UpdateItem, build_Put, fetch_UpdateItem } from "../utils/forms";
+import { payload_UpdateItem, build_Put, fetch_UpdateItem, payload_DeleteItem, build_Delete, fetch_DeleteItem } from "../utils/forms";
 import AppContext from "./AppContext";
 
 export default function ItemView(){
@@ -36,9 +36,9 @@ export default function ItemView(){
   }
 
   const handleDelete = async () => {
-    const payload = '';
-    const request = '';
-    let result = false;
+    const payload = payload_DeleteItem(item.item_id);
+    const request = build_Delete(payload);
+    let result = fetch_DeleteItem(request);
     if( result ){
       navigation('/inventory')
     }
@@ -71,7 +71,7 @@ export default function ItemView(){
         </div>
         <div className='buttons'>
           <button type='button' onClick={()=>{ setEdit(true) }}>Edit</button>
-          <button type='button'>Delete Item</button>
+          <button type='button' onClick={()=>{ handleDelete() }}>Delete Item</button>
         </div>
       </div>
     }
