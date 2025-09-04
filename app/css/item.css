@@ -1,11 +1,7 @@
 .item{
-  display: grid;
   padding: 0.2em;
   margin: 0.2em;
   width: 400px;
-  grid-template:
-    "id name name quantity" 1fr
-    "id description description description" 1fr / 1fr 2fr 2fr 1fr;
 
   p{
     padding: 0.2em;
@@ -13,22 +9,19 @@
   }
 
   .id{
-    grid-area: id;
     align-self: center;
     text-align: center;
   }
   .name{
-    grid-area: name;
     align-self: center;
-    text-align: left;
+    text-align: center;
+    flex-grow: 2;
   }
   .description{
-    grid-area: description;
     text-align: justify;
     width: 100ch;
   }
   .quantity{
-    grid-area: quantity;
     align-self: center;
     text-align: right;
   }

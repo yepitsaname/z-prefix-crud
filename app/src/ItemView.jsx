@@ -30,6 +30,7 @@ export default function ItemView(){
     let result = await fetch_UpdateItem(request,user)
     if( result ){
       let param = {item_id: item.item_id, name: event.target[0].value, description: event.target[1].value, quantity: event.target[2].value}
+      setEdit(false);
       navigation('/inventory/item?' + encodeURI(JSON.stringify(param)));
     }
     // Add Failure Case Here
