@@ -69,4 +69,11 @@
 
 .component{
   background-color: var(--sub-mask);
+  display: flex;
+  flex-wrap: wrap;
+
+  .header{
+    width: 100%;
+    text-transform: capitalize;
+  }
 }
