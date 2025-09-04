@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AppContext from "../src/AppContext";
+import '../css/topnav.css';
 
 export default function TopNav(){
   const context = useContext(AppContext);

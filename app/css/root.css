@@ -1,0 +1,38 @@
+:root{
+  @media (prefers-color-scheme: light){
+    /* Light Mode Colors */
+    --main-bg: rgb(249, 249, 226);
+    --main-comp-mask: rgba(0,0,0,0.3);
+    --sub-mask: rgba(0,0,0,0.2);
+    --text: rgb(20,40,20);
+    --heading-one: rgb(75, 99, 39);
+    --heading-two: rgb(99, 120, 68);
+    --heading-three: rgb(104, 122, 77);
+    --heading-four: rgb(101, 122, 70);
+    --heading-five: rgb(31, 34, 27);
+    --heading-six: rgb(30, 31, 28);
+  }
+
+  @media (prefers-color-scheme: dark){
+    /* Dark Mode Colors */
+    --main-bg: rgb(20,20,20);
+    --main-comp-mask: rgba(255,255,255,0.3);
+    --sub-mask: rgba(255,255,255,0.2);
+    --text: rgb(254,254,205);
+    --heading-one: rgb(140,186,70);
+    --heading-two: rgb(149, 187, 93);
+    --heading-three: rgb(139, 171, 92);
+    --heading-four: rgb(133, 165, 85);
+    --heading-five: rgb(172, 214, 108);
+    --heading-six: rgb(182, 222, 123);
+  }
+
+  background-color: var(--main-bg);
+  color: var(--text);
+  h1{ color: var(--heading-one); }
+  h2{ color: var(--heading-two); }
+  h3{ color: var(--heading-three); }
+  h4{ color: var(--heading-four); }
+  h5{ color: var(--heading-five); }
+  h6{ color: var(--heading-six); }
+}
