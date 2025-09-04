@@ -1,9 +1,12 @@
 :root{
+
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
   @media (prefers-color-scheme: light){
     /* Light Mode Colors */
     --main-bg: rgb(249, 249, 226);
     --main-comp-mask: rgba(26, 52, 26, 0.3);
-    --sub-mask: rgba(29, 63, 18, 0.2);
+    --sub-mask: rgba(130, 138, 85, 0.2);
     --button-mask: rgba(40, 71, 30, 0.1);
     --hover-mask: rgba(40,71,30,0.5);
     --click-mask: rgba(90, 114, 83, 0.5);
@@ -21,11 +24,11 @@
     /* Dark Mode Colors */
     --main-bg: rgb(20,20,20);
     --main-comp-mask: rgba(255,255,255,0.3);
-    --sub-mask: rgba(255,255,255,0.2);
+    --sub-mask: rgba(255,255,255,0.1);
     --button-mask: rgba(255,255,255,0.1);
     --hover-mask: rgba(90, 114, 83, 0.5);
     --click-mask: rgba(40,71,30,0.5);
-    --text: rgb(254,254,205);
+    --text: rgb(212, 212, 161);
     --link: rgb(208, 255, 164);
     --heading-one: rgb(140, 186, 72);
     --heading-two: rgb(149, 187, 93);

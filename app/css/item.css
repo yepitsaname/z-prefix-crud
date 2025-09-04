@@ -1,28 +1,41 @@
-.item{
+.item.component {
   padding: 0.2em;
   margin: 0.2em;
   width: 400px;
+  justify-content: left;
 
   p{
     padding: 0.2em;
-    margin: 0;
+    margin-inline: 0.1em;
+    margin-top: 0.1em;
+    margin-bottom: 0;
+    background-color: var(--sub-mask)
   }
 
   .id{
     align-self: center;
     text-align: center;
+    margin-right: 0;
+    background-color: rgba(120,120,120,0.3);
   }
   .name{
     align-self: center;
     text-align: center;
     flex-grow: 2;
+    font-weight: 600;
+    background-color: rgba(120,120,120,0.3);
   }
   .description{
     text-align: justify;
     width: 100ch;
+    height: 4.5ch;
+    font-weight: 100;
+    background-color: rgba(255,255,255,0.18);
   }
   .quantity{
     align-self: center;
     text-align: right;
+    font-weight: 200;
+    background-color: rgba(255,255,255,0.2);
   }
 }
