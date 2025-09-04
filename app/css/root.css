@@ -66,3 +66,7 @@
     color: var(--link);
   }
 }
+
+.component{
+  background-color: var(--sub-mask);
+}

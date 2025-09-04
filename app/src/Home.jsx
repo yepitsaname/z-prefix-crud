@@ -20,8 +20,8 @@ export default function Home(){
   },[])
 
   return (
-    <div>
-      <h3>All Items</h3>
+    <div className="component">
+      <h3 className="header">All Items</h3>
       {items.map(item=><Item key={item.item_id} item={item} noAuth={true} />)}
     </div>
   )

@@ -30,7 +30,7 @@ const trimDescription = (description) => {
  * @property {number} quantity
  */
   return (
-    <div className='item' onClick={()=>{ clickHandler() }}>
+    <div className='item component' onClick={()=>{ clickHandler() }}>
       <p className='id'>{item.item_id}</p>
       <p className='name'>{item.name}</p>
       <p className="description">{trimDescription(item.description)}</p>

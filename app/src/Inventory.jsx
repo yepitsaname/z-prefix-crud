@@ -21,9 +21,9 @@ export default function Inventory(){
   },[])
 
   return (
-    <>
-      <h3>{name.first} Inventory</h3>
+    <div className="component">
+      <h3 className="header">{name.first} Inventory</h3>
       {items.map(item=><Item key={item.item_id} item={item} />)}
-    </>
+    </div>
   )
 }

@@ -9,7 +9,7 @@ export default function ItemViewNoAuth(){
   },[])
 
   return (
-    <div className='view-item'>
+    <div className='view-item component'>
       <div className='content'>
         <p className='id'>Item ID: {item.item_id}</p>
         <p className='name'>Name <br/>{item.name}</p>

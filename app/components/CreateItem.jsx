@@ -31,16 +31,16 @@ export default function CreateAccount(){
   }
 
   return (
-    <form onSubmit={(event)=>{handleSubmit(event)}}>
+    <form className="component" onSubmit={(event)=>{handleSubmit(event)}}>
       <h2>Add An Item</h2>
-      <label htmlFor="name">Name</label>
-      <input type="text" id="name" name="item name" placeholder="Item name..." maxLength={16} />
+      <label htmlFor="name">Name</label><br/>
+      <input type="text" id="name" name="item name" placeholder="Item name..." maxLength={16} /><br/>
 
-      <label htmlFor="description">Description</label>
-      <input type="text" id="description" name="item description" placeholder="Description..." maxLength={1024} />
+      <label htmlFor="description">Description</label><br/>
+      <input type="text" id="description" name="item description" placeholder="Description..." maxLength={1024} /><br/>
 
-      <label htmlFor="quantity">Quantity</label>
-      <input type="number" id="quantity" name="item quantity" placeholder="Quantity..." />
+      <label htmlFor="quantity">Quantity</label><br/>
+      <input type="number" id="quantity" name="item quantity" placeholder="Quantity..." /><br/>
 
       <button type="submit">Add Item</button>
       <button type="button" onClick={()=>{handleClick()}}>Cancel</button>
