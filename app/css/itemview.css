@@ -1,0 +1,7 @@
+.form.component{
+  .description{
+    text-align: justify;
+    max-width: 60ch;
+    padding-inline: 0.5em;
+  }
+}

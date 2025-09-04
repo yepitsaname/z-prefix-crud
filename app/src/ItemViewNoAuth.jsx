@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import '../css/itemview.css';
 
 export default function ItemViewNoAuth(){
   const [item, setItem] = useState({item_id: 'Loading...', name: 'Loading...', description: 'Loading...', quantity: 0});
@@ -11,10 +12,9 @@ export default function ItemViewNoAuth(){
   return (
     <div className='form component'>
       <div className='content'>
-        <p className='id'>Item ID: {item.item_id}</p>
-        <p className='name'>Name <br/>{item.name}</p>
-        <p className="description">Description <br/> {item.description}</p>
-        <p className='quantity'>Quantitiy: {item.quantity}</p>
+        <p>Item #{item.item_id} {item.name}</p>
+        <p className="description">{item.description}</p>
+        <p className='quantity'>In Stock: {item.quantity}</p>
       </div>
     </div>
   )

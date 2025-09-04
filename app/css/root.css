@@ -9,6 +9,7 @@
     --hover-mask: rgba(40,71,30,0.5);
     --click-mask: rgba(90, 114, 83, 0.5);
     --text: rgb(20,40,20);
+    --text-bg: rgba(210, 218, 165,0.7);
     --link: rgb(30,60,30);
     --heading-one: rgb(75, 99, 39);
     --heading-two: rgb(99, 120, 68);
@@ -27,6 +28,7 @@
     --hover-mask: rgba(90, 114, 83, 0.5);
     --click-mask: rgba(40,71,30,0.5);
     --text: rgb(212, 212, 161);
+    --text-bg: rgba(190, 214, 193,0.7);
     --link: rgb(208, 255, 164);
     --heading-one: rgb(140, 186, 72);
     --heading-two: rgb(149, 187, 93);
@@ -113,16 +115,42 @@ body{
   margin-inline: auto;
   padding: 1em;
   border-radius: 1em;
+
   max-height: min-content;
   justify-self: center;
   align-self: center;
 
+  justify-content: center;
+  align-items: center;
+
   input, textarea{
     width: 80%;
+    border-radius: 1ch;
+    padding: 1ch;
+    background-color: var(--text-bg);
+    resize: none;
+    border-style: unset;
+    border: 1px solid black;
+  }
+
+  input::-webkit-outer-spin-button, input::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
   }
 
   input[type="number"]{
     text-align: center;
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+
+  input::placeholder{
+    text-align: left;
+  }
+
+  label{
+    width: 80%;
+    text-align: left;
   }
 }
 
