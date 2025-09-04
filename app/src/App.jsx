@@ -8,6 +8,8 @@ import TopNav from "../components/TopNav";
 import Inventory from "./Inventory";
 import CreateItem from "../components/CreateItem";
 import ItemView from "./ItemView";
+import ItemViewNoAuth from "./ItemViewNoAuth";
+import Home from "./Home";
 
 export default function App() {
   const [user, setUser] = useState(null)
@@ -17,7 +19,8 @@ export default function App() {
       <TopNav />
 
       <Routes>
-        <Route path="/" element={<></>} />
+        <Route path="/" element={<Home/>} />
+        <Route path="/item?" element={<ItemViewNoAuth />} />
         <Route path="/create-account" element={<CreateAccount/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/inventory" element={<Inventory/>}/>

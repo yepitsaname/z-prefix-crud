@@ -1,9 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import '../css/item.css';
 
-export default function Item({item}){
+export default function Item({item, noAuth}){
   const navigator = useNavigate();
   const clickHandler = () => {
+    noAuth ?
+    navigator('/item?' + encodeURI(JSON.stringify(item))) :
     navigator('/inventory/item?' + encodeURI(JSON.stringify(item)))
   }
 
