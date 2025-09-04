@@ -35,6 +35,15 @@ export default function ItemView(){
     // Add Failure Case Here
   }
 
+  const handleDelete = async () => {
+    const payload = '';
+    const request = '';
+    let result = false;
+    if( result ){
+      navigation('/inventory')
+    }
+  }
+
   return (<>
     {edit ?
       <form className='view-item' onSubmit={(event)=>{handleSubmit(event)}}>
