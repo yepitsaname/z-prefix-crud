@@ -17,6 +17,19 @@ export function payload_CreateUser(data){
 /**
  * Takes event target data and transforms it into a useable payload
  * @param {Event.target} data
+ * @returns a create user object in JSON
+ */
+export function payload_CreateItem(data){
+  return {
+    "name": data[0].value,
+    "description": data[1].value,
+    "quantity": data[2].value
+  }
+}
+
+/**
+ * Takes event target data and transforms it into a useable payload
+ * @param {Event.target} data
  * @returns a user login object in JSON
  */
 export function payload_LoginUser(data){
@@ -69,7 +82,6 @@ export function fetch_CreateUser(request){
   .catch(err => console.error(err));
 }
 
-
 /**
  * Takes a request and POSTs to the /login endpoint
  * @param {Object} request request parameters
@@ -83,4 +95,16 @@ export async function fetch_Login(request){
     return true;
   })
   .catch(err => false);
+}
+
+/**
+ * Takes a request and POSTs to the /users endpoint
+ * @param {Object} request request parameters
+ */
+export function fetch_CreateItem(request, user){
+  fetch(`${URL}/users/${user}/items`,request)
+  .then(res => {
+    if(res.status != 201){ throw new Error(res.statusText)}
+  })
+  .catch(err => console.error(err));
 }
