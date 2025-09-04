@@ -7,11 +7,18 @@ export default function Home(){
   useEffect(()=>{
 
     fetch(`http://localhost:5050/items`)
-    .then(res => res.json())
-    .then(json => setItems(json))
+    .then(res => {
+      if(res.status != 200){ throw new Error(res.statusText)};
+      return res.json();
+    })
+    .then(json => {
+      if(!json || !Array.isArray(json) || json?.length == 0 ){ throw new Error('Bad response or no data') }
+      setItems(json);
+    })
     .catch(err => console.error(err))
 
   },[])
+
   return (
     <div>
       {items.map(item=><Item key={item.item_id} item={item} noAuth={true} />)}
