@@ -13,6 +13,10 @@ export default function CreateAccount(){
     }
   },[])
 
+  const handleClick = () => {
+    navigation('/inventory');
+  }
+
   /**
    * Takes an event triggered by the form, converts it into JSON, and sends a submit request
    * @param {Event} event
@@ -39,7 +43,7 @@ export default function CreateAccount(){
       <input type="number" id="quantity" name="item quantity" placeholder="Quantity..." />
 
       <button type="submit">Add Item</button>
-      <button type="button">Cancel</button>
+      <button type="button" onClick={()=>{handleClick()}}>Cancel</button>
     </form>
   )
 }

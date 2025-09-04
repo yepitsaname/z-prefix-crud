@@ -46,4 +46,23 @@
 
   justify-content: center;
   text-align: center;
+
+  a, button{
+    min-width: 10ch;
+    padding: 0.5em;
+    margin: 0.5em;
+    border-radius: 2ch;
+    background-color: var(--button-mask);
+    text-decoration: none;
+    color: var(--link)
+  }
+  a:hover, button:hover{
+    background-color: var(--hover-mask);
+  }
+  a:active, button:active{
+    background-color: var(--click-mask);
+  }
+  a:visited, button:visited{
+    color: var(--link);
+  }
 }

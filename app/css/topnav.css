@@ -2,21 +2,4 @@
   background-color: var(--main-comp-mask);
   margin: 0;
   padding: 1em;
-  a{
-    padding: 0.5em;
-    margin: 0.5em;
-    border-radius: 2ch;
-    background-color: var(--button-mask);
-    text-decoration: none;
-    color: var(--link)
-  }
-  a:hover{
-    background-color: var(--hover-mask);
-  }
-  a:active{
-    background-color: var(--click-mask);
-  }
-  a:visited{
-    color: var(--link);
-  }
 }
