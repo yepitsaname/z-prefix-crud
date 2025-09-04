@@ -71,9 +71,14 @@
   }
 }
 
+body{
+  margin: 0;
+}
+
 #root{
   display: flex;
   width: 100vw;
+  min-height: 100vh;
 }
 
 .component{
@@ -93,5 +98,13 @@
   #root{
     display: unset;
     font-size: smaller;
+  }
+  :root{
+    a, button{
+      width: 40ch;
+      align-self: center;
+      padding: 0.75em;
+      max-width: 50ch;
+    }
   }
 }

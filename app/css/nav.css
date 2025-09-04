@@ -1,4 +1,7 @@
 .nav{
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
   background-color: var(--main-comp-mask);
   margin: 0;
   padding: 1em;
