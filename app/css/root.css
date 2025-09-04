@@ -2,9 +2,13 @@
   @media (prefers-color-scheme: light){
     /* Light Mode Colors */
     --main-bg: rgb(249, 249, 226);
-    --main-comp-mask: rgba(0,0,0,0.3);
-    --sub-mask: rgba(0,0,0,0.2);
+    --main-comp-mask: rgba(26, 52, 26, 0.3);
+    --sub-mask: rgba(29, 63, 18, 0.2);
+    --button-mask: rgba(40, 71, 30, 0.1);
+    --hover-mask: rgba(40,71,30,0.5);
+    --click-mask: rgba(90, 114, 83, 0.5);
     --text: rgb(20,40,20);
+    --link: rgb(30,60,30);
     --heading-one: rgb(75, 99, 39);
     --heading-two: rgb(99, 120, 68);
     --heading-three: rgb(104, 122, 77);
@@ -18,8 +22,12 @@
     --main-bg: rgb(20,20,20);
     --main-comp-mask: rgba(255,255,255,0.3);
     --sub-mask: rgba(255,255,255,0.2);
+    --button-mask: rgba(255,255,255,0.1);
+    --hover-mask: rgba(90, 114, 83, 0.5);
+    --click-mask: rgba(40,71,30,0.5);
     --text: rgb(254,254,205);
-    --heading-one: rgb(140,186,70);
+    --link: rgb(208, 255, 164);
+    --heading-one: rgb(140, 186, 72);
     --heading-two: rgb(149, 187, 93);
     --heading-three: rgb(139, 171, 92);
     --heading-four: rgb(133, 165, 85);
@@ -35,4 +43,7 @@
   h4{ color: var(--heading-four); }
   h5{ color: var(--heading-five); }
   h6{ color: var(--heading-six); }
+
+  justify-content: center;
+  text-align: center;
 }
