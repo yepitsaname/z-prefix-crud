@@ -32,11 +32,11 @@ export default function CreateAccount(){
       <label htmlFor="name">Name</label>
       <input type="text" id="name" name="item name" placeholder="Item name..." maxLength={16} />
 
-      <label htmlFor="description">First Name</label>
+      <label htmlFor="description">Description</label>
       <input type="text" id="description" name="item description" placeholder="Description..." maxLength={1024} />
 
-      <label htmlFor="quantity">Last Name</label>
-      <input type="text" id="quantity" name="item quantity" placeholder="Quantity..." />
+      <label htmlFor="quantity">Quantity</label>
+      <input type="number" id="quantity" name="item quantity" placeholder="Quantity..." />
 
       <button type="submit">Add Item</button>
       <button type="button">Cancel</button>
