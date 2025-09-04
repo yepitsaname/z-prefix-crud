@@ -13,7 +13,7 @@ export default function CreateAccount(){
   }
 
   return (
-    <form className="component" onSubmit={(event)=>{handleSubmit(event)}}>
+    <form className="form component" onSubmit={(event)=>{handleSubmit(event)}}>
       <h3 className="header">Account Creation</h3>
       <label htmlFor="username">Username</label><br/>
       <input type="text" id="username" name="username" placeholder="username" maxLength={16} /><br/>

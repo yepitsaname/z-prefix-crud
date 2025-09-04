@@ -25,7 +25,7 @@ export default function Login(){
   }
 
   return (
-    <form className="component" onSubmit={(event)=>{handleSubmit(event)}}>
+    <form className="form component" onSubmit={(event)=>{handleSubmit(event)}}>
       <label htmlFor="username">Username</label><br/>
       <input type="text" id="username" name="username" placeholder="username" maxLength={16} /><br/>
 

@@ -92,19 +92,83 @@ body{
     width: 100%;
     text-transform: capitalize;
   }
+
+  button{
+    border-color: unset;
+    border-style: unset;
+    margin-top: 2em;
+    padding: 0.75em;
+    width: 20ch;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+}
+
+.form.component{
+  flex-direction: column;
+  min-width: 400px;
+  max-width: 600px;
+
+  margin-block: 1em;
+  margin-inline: auto;
+  padding: 1em;
+  border-radius: 1em;
+  max-height: min-content;
+  justify-self: center;
+  align-self: center;
+
+  input, textarea{
+    width: 80%;
+  }
+
+  input[type="number"]{
+    text-align: center;
+  }
 }
 
 @media screen and (max-width: 700px) {
   #root{
     display: unset;
-    font-size: smaller;
   }
+
   :root{
+    font-size: smaller;
     a, button{
       width: 40ch;
       align-self: center;
       padding: 0.75em;
       max-width: 50ch;
+      font-size: small;
+    }
+
+    button{
+      font-size: smaller;
+      font-weight: 700;
+      margin: 0.75em;
+    }
+
+    .form.component{
+      min-width: unset;
+      max-width: 360px;
+    }
+  }
+}
+
+@media screen and (max-width: 400px){
+  :root{
+    .form.component{
+      min-width: unset;
+      max-width: 320px;
+    }
+  }
+}
+
+@media screen and (max-width: 360px){
+  :root{
+    font-size: small;
+    .form.component{
+      min-width: unset;
+      max-width: 300px;
     }
   }
 }

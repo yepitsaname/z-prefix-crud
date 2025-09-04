@@ -47,7 +47,7 @@ export default function ItemView(){
 
   return (<>
     {edit ?
-      <form className='view-item component' onSubmit={(event)=>{handleSubmit(event)}}>
+      <form className='form component' onSubmit={(event)=>{handleSubmit(event)}}>
         <div className='content'>
           <p className='id'>Item ID: {item.item_id}</p>
           <label htmlFor="name">Name</label><br/>
@@ -63,7 +63,7 @@ export default function ItemView(){
         </div>
       </form>
       :
-      <div className='view-item component'>
+      <div className='form component'>
         <div className='content'>
           <p className='id'>Item ID: {item.item_id}</p>
           <p className='name'>Name <br/>{item.name}</p>
