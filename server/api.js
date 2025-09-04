@@ -5,7 +5,6 @@ const knex = require('knex')(require('./knexfile.js')[process.env.NODE_ENV||'dev
 const port = 5050;
 
 const {hash, compareHash, genJWT, decodeJWT} = require('./utils/auth');
-const { isReadable } = require('supertest/lib/test.js');
 
 const app = express();
 app.use(cors(
