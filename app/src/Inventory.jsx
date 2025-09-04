@@ -16,7 +16,7 @@ export default function Inventory(){
         headers:{'access-control-allow-origin': 'http://localhost:5173'}, credentials: 'include'})
       .then(res => res.json())
       .then(json => setItems(json))
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
     }
   },[])
 
