@@ -7,6 +7,10 @@ export default function Login(){
   const {login, setName} = useContext(AppContext);
   const navigation = useNavigate();
 
+  const handleCancel = ()=>{
+    navigation('/');
+  }
+
   /**
    * Takes an event triggered by the form, converts it into JSON, and sends a submit request
    * @param {Event} event
@@ -32,8 +36,10 @@ export default function Login(){
       <label htmlFor="password">Password</label><br/>
       <input type="password" id="password" name="password" placeholder="****************" maxLength={16} /><br/>
 
-      <button type="submit">Login</button>
-      <button type="button">Cancel</button>
+      <div>
+        <button type="submit">Login</button>
+        <button type="button" onClick={()=>{handleCancel()}}>Cancel</button>
+      </div>
     </form>
   )
 }

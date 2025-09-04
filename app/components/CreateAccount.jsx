@@ -15,23 +15,40 @@ export default function CreateAccount(){
   return (
     <form className="form component" onSubmit={(event)=>{handleSubmit(event)}}>
       <h3 className="header">Account Creation</h3>
-      <label htmlFor="username">Username</label><br/>
+      <label htmlFor="username">Username
+        <span className="tooltip">help?</span>
+        <span className="tooltip-text">a-z,A-Z, 0-9 only</span>
+      </label><br/>
       <input type="text" id="username" name="username" placeholder="username" maxLength={16} /><br/>
 
-      <label htmlFor="first-name">First Name</label><br/>
+      <label htmlFor="first-name">First Name
+        <span className="tooltip">help?</span>
+        <span className="tooltip-text">a-z,A-Z,' only; 16 characters max</span>
+      </label><br/>
       <input type="text" id="first-name" name="first name" placeholder="First name..." maxLength={40} /><br/>
 
-      <label htmlFor="last-name">Last Name</label><br/>
+      <label htmlFor="last-name">Last Name
+        <span className="tooltip">help?</span>
+        <span className="tooltip-text">a-z,A-Z,' only; 16 characters max</span>
+      </label><br/>
       <input type="text" id="last-name" name="last name" placeholder="Last name..." maxLength={40} /><br/>
 
-      <label htmlFor="password">Password</label><br/>
+      <label htmlFor="password">Password
+        <span className="tooltip">help?</span>
+        <span className="tooltip-text">a-z,A-Z,0-9,!,@,#,$ only; 8-16 characters</span>
+      </label><br/>
       <input type="password" id="password" name="password" placeholder="****************" maxLength={16} /><br/>
 
-      <label htmlFor="confirm-password">Confirm password</label><br/>
+      <label htmlFor="confirm-password">Confirm password
+        <span className="tooltip">help?</span>
+        <span className="tooltip-text">a-z,A-Z,0-9,!,@,#,$ only; 8-16 characters</span>
+      </label><br/>
       <input type="password" id="confirm-password" name="confirm password" placeholder="****************" maxLength={16} /><br/>
 
-      <button type="submit">Create Account</button>
-      <button type="button">Cancel</button>
+      <div>
+        <button type="submit">Create Account</button>
+        <button type="button">Cancel</button>
+      </div>
     </form>
   )
 }
