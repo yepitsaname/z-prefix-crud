@@ -17,11 +17,13 @@ export default function CreateAccount(){
    * Takes an event triggered by the form, converts it into JSON, and sends a submit request
    * @param {Event} event
    */
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const payload = payload_CreateItem(event.target);
     const request = build_Post(payload);
-    fetch_CreateItem(request,user);
+    let result = await fetch_CreateItem(request,user)
+    if( result ){ navigation('/inventory') }
+    // Add Failure Case Here
   }
 
   return (

@@ -93,17 +93,18 @@ export async function fetch_Login(request){
     res.headers.getSetCookie()
     return true;
   })
-  .catch(err => false);
+  .catch(err => err);
 }
 
 /**
  * Takes a request and POSTs to the /users endpoint
  * @param {Object} request request parameters
  */
-export function fetch_CreateItem(request, user){
-  fetch(`${URL}/users/${user}/items`,request)
+export async function fetch_CreateItem(request, user){
+  return fetch(`${URL}/users/${user}/items`,request)
   .then(res => {
     if(res.status != 201){ throw new Error(res.statusText)}
+    return true;
   })
-  .catch(err => console.error(err));
+  .catch(err => err);
 }
