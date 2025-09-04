@@ -25,6 +25,7 @@
   .description{
     grid-area: description;
     text-align: justify;
+    width: 100ch;
   }
   .quantity{
     grid-area: quantity;
