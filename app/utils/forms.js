@@ -78,7 +78,7 @@ export async function fetch_Login(request){
   return fetch(`${URL}/login`,request)
   .then(res => {
     console.log(res.status);
-    if(res.status != 201){ throw new Error(res.statusText)}
+    if(res.status != 200){ throw new Error(res.statusText)}
     res.headers.getSetCookie()
     return true;
   })

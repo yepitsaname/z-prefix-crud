@@ -5,6 +5,7 @@ const knex = require('knex')(require('./knexfile.js')[process.env.NODE_ENV||'dev
 const port = 5050;
 
 const {hash, compareHash, genJWT, decodeJWT} = require('./utils/auth');
+const { isReadable } = require('supertest/lib/test.js');
 
 const app = express();
 app.use(cors(
@@ -37,7 +38,7 @@ app.post('/login', async (req,res)=>{
         res.setHeader('access-control-allow-origin','http://localhost:5173')
         res.setHeader('access-control-allow-methods', 'POST, GET, PATCH, PUT, DELETE')
         res.setHeader('access-control-allow-headers','Origin, X-Requested-With, Content-Type, Accept, Authorization')
-        res.status(201)
+        res.status(200)
         res.send();
       } else { res.status(401).send() }
     })
@@ -69,12 +70,6 @@ app.post('/users', (req,res)=>{
   }
 })
 
-app.get('/items', (req,res)=>{
-  knex.select("*").from("items")
-  .then( data => res.status(200).send(data))
-  .catch(err => res.send(err))
-})
-
 app.get('/users/:account/items', cors(), async (req,res)=>{
   if( !req.cookies.jwt_auth ){ return res.status(401).send() }
   knex.select('secret').from('users').where('username','=',req.params.account)
@@ -98,6 +93,44 @@ app.get('/users/:account/items', cors(), async (req,res)=>{
     .catch(err => res.send(err));
   })
 })
+
+app.post('/users/:account/items', (req,res)=>{
+  if(!req.cookies.jwt_auth ){ return res.status(401).send()}
+
+  const keys = Object.keys(req.body);
+  if(keys.length != 3){ return res.status(400).send('400 - Incorrect Number of Parameters')}
+  if(
+    !keys.includes("name") ||
+    !keys.includes("description") ||
+    !keys.includes("quantity")
+  ){ return res.status(400).send('400 - Incorrect parameters')}
+
+  knex.select('secret','user_id').from('users').where('username','=',req.params.account)
+  .then( async data => {
+    if(data.rowsCount == 0){ return res.status(401).send() };
+    const decodedJWT = await decodeJWT(req.cookies.jwt_auth, data[0].secret);
+    if(decodedJWT == null){ return res.status(401).send() };
+    if(decodedJWT.username != req.params.account){ return res.status(401).send() };
+
+    const record = {
+      "user_id": data[0].user_id,
+      "name": req.body.name,
+      "description": req.body.description,
+      "quantity": req.body.quantity
+    }
+
+    knex('items').insert(record)
+    .then( data != 0 ? res.status(201).send('Item created') : res.status(500).send('Unable to create item'))
+  })
+})
+
+app.get('/items', (req,res)=>{
+  knex.select("*").from("items")
+  .then( data => res.status(200).send(data))
+  .catch(err => res.send(err))
+})
+
+
 
 let server = app.listen(port, ()=>{console.log(`Listening on port ${port}`)});
 app.closeServer = () => {
