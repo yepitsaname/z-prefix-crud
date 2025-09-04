@@ -136,7 +136,7 @@ app.put('/users/:account/items', (req,res)=>{
 
   knex.select('secret','user_id').from('users').where('username','=',req.params.account)
   .then( async data => {
-    if(data.rowsCount == 0){ return res.status(401).send() };
+    if(data.length == 0){ return res.status(401).send() };
     const decodedJWT = await decodeJWT(req.cookies.jwt_auth, data[0].secret);
     if(decodedJWT == null){ return res.status(401).send() };
     if(decodedJWT.username != req.params.account){ return res.status(401).send() };
@@ -153,15 +153,14 @@ app.put('/users/:account/items', (req,res)=>{
 })
 
 app.delete('/users/:account/items', (req,res)=>{
-  console.log('hellow')
   if(!req.cookies.jwt_auth ){ return res.status(401).send()}
   const keys = Object.keys(req.body);
   if(keys.length != 1){ return res.status(400).send('400 - Incorrect Number of Parameters')}
   if(!keys.includes("item_id")){ return res.status(400).send('400 - Incorrect parameters')}
-
   knex.select('secret','user_id').from('users').where('username','=',req.params.account)
   .then( async data => {
-    if(data.rowsCount == 0){ return res.status(401).send() };
+    console.log(data);
+    if(data.length == 0){ return res.status(401).send() };
     const decodedJWT = await decodeJWT(req.cookies.jwt_auth, data[0].secret);
     if(decodedJWT == null){ return res.status(401).send() };
     if(decodedJWT.username != req.params.account){ return res.status(401).send() };

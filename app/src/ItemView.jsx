@@ -38,7 +38,7 @@ export default function ItemView(){
   const handleDelete = async () => {
     const payload = payload_DeleteItem(item.item_id);
     const request = build_Delete(payload);
-    let result = fetch_DeleteItem(request);
+    let result = fetch_DeleteItem(request, user);
     if( result ){
       navigation('/inventory')
     }
