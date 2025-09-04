@@ -130,12 +130,13 @@ export function build_Delete (payload){
  * Takes a request and POSTs to the /users endpoint
  * @param {Object} request request parameters
  */
-export function fetch_CreateUser(request){
+export async function fetch_CreateUser(request){
   fetch(`${URL}/users`,request)
   .then(res => {
     if(res.status != 201){ throw new Error(res.statusText)}
+    return true;
   })
-  .catch(err => console.error(err));
+  .catch(err => err);
 }
 
 /**

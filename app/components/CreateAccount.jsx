@@ -1,22 +1,31 @@
 import { payload_CreateUser, build_Post, fetch_CreateUser} from "../utils/forms";
 import { validate } from "../utils/validation";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateAccount(){
+
+  const navigation = useNavigate();
   /**
    * Takes an event triggered by the form, converts it into JSON, and sends a submit request
    * @param {Event} event
    */
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if(event.target[2].value != event.target[3].value){
+    if(event.target[3].value != event.target[4].value){
+      console.log(event.target[3].value, event.target[4].value)
       alert("Passwords do not match!");
       return;
     }
 
     const payload = payload_CreateUser(event.target);
     const request = build_Post(payload);
-    fetch_CreateUser(request);
+    let result = await fetch_CreateUser(request);
+    if( result ){
+      navigation('/login');
+    } else {
+      alert('Invalid Username!')
+    }
   }
 
   return (
