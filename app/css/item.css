@@ -3,6 +3,7 @@
   margin: 0.2em;
   width: 400px;
   justify-content: left;
+  border-radius: 1ch;
 
   p{
     padding: 0.2em;
@@ -17,6 +18,7 @@
     text-align: center;
     margin-right: 0;
     background-color: rgba(120,120,120,0.3);
+    border-top-left-radius: 0.6ch;
   }
   .name{
     align-self: center;
@@ -24,18 +26,27 @@
     flex-grow: 2;
     font-weight: 600;
     background-color: rgba(120,120,120,0.3);
+    border-top-right-radius: 0.6ch;
   }
   .description{
     text-align: justify;
     width: 100ch;
-    height: 4.5ch;
+    height: 5ch;
     font-weight: 100;
     background-color: rgba(255,255,255,0.18);
+    border-bottom-right-radius: 0.6ch;
   }
   .quantity{
     align-self: center;
     text-align: right;
-    font-weight: 200;
-    background-color: rgba(255,255,255,0.2);
+    font-weight: 400;
+    background-color: rgba(120,120,120,0.3);
+    border-bottom-left-radius: 0.6ch;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .item.component{
+    width: 300px;
   }
 }

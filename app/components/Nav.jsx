@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AppContext from "../src/AppContext";
-import '../css/topnav.css';
+import '../css/nav.css';
 
-export default function TopNav(){
+export default function Nav(){
   const context = useContext(AppContext);
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -12,7 +12,7 @@ export default function TopNav(){
   },[context.user])
 
   return(
-    <nav className="top-nav">
+    <nav className="nav">
       <Link to="/">Home</Link>
       {loggedIn ? (<>
         <Link to={"/inventory"}>Inventory</Link>

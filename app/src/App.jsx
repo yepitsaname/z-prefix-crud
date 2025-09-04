@@ -4,7 +4,7 @@ import { useState } from "react";
 import CreateAccount from "../components/CreateAccount";
 import Login from "../components/Login";
 import AppContext from "./AppContext";
-import TopNav from "../components/TopNav";
+import Nav from "../components/Nav";
 import Inventory from "./Inventory";
 import CreateItem from "../components/CreateItem";
 import ItemView from "./ItemView";
@@ -17,7 +17,7 @@ export default function App() {
 
   return (
     <AppContext.Provider value={{user: user, login: setUser, name: name, setName: setName}}>
-      <TopNav />
+      <Nav />
 
       <Routes>
         <Route path="/" element={<Home/>} />
