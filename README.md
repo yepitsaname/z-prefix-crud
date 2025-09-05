@@ -5,10 +5,10 @@ This application will allow an inventory manager to add, delete, modify, and vie
 - WebApp Address: http://127.0.0.0:5173
 
 ## Installation
-### Requirements
+#### Requirements
 - Docker installed
 
-### Steps
+#### Steps
 1. Copy all the files from the repository with git clone into your desired directory.
 2. In a terminal, navigate to the directory you cloned the repo into.
 3. Run `docker compose up -d`
@@ -46,13 +46,13 @@ The following are all of the paths that are available to a user navigating the w
 
 ## Technologies Used
 Note: Development dependencies/technologies are not listed - see the various package.json files for all dependencies used.
-### WebApp
+#### WebApp
 - React, Vite, Vanilla JS, React Router DOM, Docker, Git
-### API
+#### API
 - Express, BCrypt, Cookie-Parser, CORS, Dotenv, Jose, KNEX, Nodemon, PG, Faker, Docker, Git
-### Database
+#### Database
 - PostgreSQL
-### Container System
+#### Container System
 - Docker
 
 ## Final Note
