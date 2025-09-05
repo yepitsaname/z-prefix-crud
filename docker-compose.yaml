@@ -16,6 +16,7 @@ services:
     image: "api-server"
     volumes:
       - "./server:/src/server"
+      - "/src/server/node_modules"
     container_name: api-container
     ports:
       - "5050:5050"
@@ -31,6 +32,7 @@ services:
     container_name: react-container
     volumes:
       - "./app:/src/app"
+      - "/src/app/node_modules"
     ports:
       - "5173:5173"
     depends_on:
