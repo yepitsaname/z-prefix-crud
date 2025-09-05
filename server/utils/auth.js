@@ -59,17 +59,11 @@ export async function genJWT(username,jwkSecret){
 }
 
 export async function decodeJWT(jwt, jwkSecret){
-  console.log(jwt, jwkSecret)
   const decoded = jose.base64url.decode(jwkSecret);
-  console.log(decoded);
   try{
-    console.log('attempting')
-    let plainJWT = await jose.jwtDecrypt(jwt, decoded);
-    console.log(plainJWT);
     return (await jose.jwtDecrypt(jwt, decoded)).payload
   }
   catch(err){
-    console.log(err)
     return null;
   }
 }
