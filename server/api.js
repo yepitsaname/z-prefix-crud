@@ -20,6 +20,7 @@ app.use(cookieParser())
 app.get('/', (req,res)=>res.status(200).send('API is up'));
 
 app.post('/login', async (req,res)=>{
+  console.log();
   let keys = Object.keys(req.body);
   if( keys.length != 2 ){
     res.status(400).send('400 - Incorrect number of parameters');
@@ -187,7 +188,7 @@ app.get('/items', (req,res)=>{
   .catch(err => res.send(err))
 })
 
-let server = app.listen(port, ()=>{console.log(`Listening on port ${port}`)});
+let server = app.listen(port, ()=>{console.log(process.env,`Listening on port ${port}`)});
 app.closeServer = () => {
   server.close();
 }

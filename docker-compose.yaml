@@ -1,0 +1,37 @@
+services:
+
+  database:
+    image: postgres
+    container_name: postgres-container
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: inventory_management
+      POSTGRES_PASSWORD: password
+    volumes:
+      - ./db:/var/lib/postgresql/data postgres
+
+  backend:
+    build: server/
+    image: "api-server"
+    volumes:
+      - "./server:/src/app"
+    container_name: api-container
+    ports:
+      - "5050:5050"
+    depends_on:
+      - database
+    links:
+      - database
+    command: sh -c "npm install && npm install -g knex && knex migrate:latest && npm start"
+
+  frontend:
+    build: app/
+    image: "inventory-app"
+    container_name: react-container
+    volumes:
+      - "./app:/src/app"
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
