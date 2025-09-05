@@ -55,7 +55,7 @@ export default function ItemView(){
         <input type="text" id="name" name="name" className='name' defaultValue={item.name}/><br/>
 
         <label htmlFor="description">Description</label><br/>
-        <textarea id="description" name="description" rows="5" cols="40" defaultValue={item.description}/><br/>
+        <textarea id="description" name="description" cols="40" defaultValue={item.description}/><br/>
 
         <label htmlFor="quantity">Quantity</label><br/>
         <input type="number" id="quantity" name="quantity" className='quantity' defaultValue={item.quantity}/>

@@ -2,6 +2,7 @@
   padding: 0.2em;
   margin: 0.2em;
   width: 400px;
+  height: 117px;
   justify-content: left;
   border-radius: 1ch;
 
@@ -10,7 +11,7 @@
     margin-inline: 0.1em;
     margin-top: 0.1em;
     margin-bottom: 0;
-    background-color: var(--sub-mask)
+    background-color: var(--sub-mask);
   }
 
   .id{
@@ -31,10 +32,11 @@
   .description{
     text-align: justify;
     width: 100ch;
-    height: 5ch;
+    height: 7ch;
     font-weight: 100;
     background-color: rgba(255,255,255,0.18);
     border-bottom-right-radius: 0.6ch;
+    word-break: break-all;
   }
   .quantity{
     align-self: center;

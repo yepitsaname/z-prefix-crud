@@ -40,7 +40,7 @@ export default function CreateAccount(){
       <input type="text" id="name" name="item name" placeholder="Item name..." maxLength={16} /><br/>
 
       <label htmlFor="description">Description</label>
-      <input type="text" id="description" name="item description" placeholder="Description..." maxLength={1024} /><br/>
+      <textarea id="description" name="item description" placeholder="Description..." maxLength={1024} /><br/>
 
       <label htmlFor="quantity">Quantity</label>
       <input type="number" id="quantity" name="item quantity" placeholder="Quantity..." /><br/>
