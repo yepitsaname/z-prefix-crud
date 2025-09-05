@@ -24,7 +24,7 @@ services:
       - database
     links:
       - database
-    command: sh -c "npx knex migrate:rollback && knex migrate:latest && knex seed:run && npm start"
+    command: sh -c "npm install -g knex && knex migrate:rollback && knex migrate:latest && knex seed:run && npm start"
 
   frontend:
     build: app/
