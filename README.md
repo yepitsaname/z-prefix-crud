@@ -6,7 +6,8 @@ This application will allow an inventory manager to add, delete, modify, and vie
 
 ## Installation
 #### Requirements
-- Docker installed
+- Docker
+- WSL 2.0 (potentially)
 
 #### Steps
 1. Copy all the files from the repository with git clone into your desired directory.
