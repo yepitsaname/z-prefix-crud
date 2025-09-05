@@ -33,13 +33,11 @@ export default function CreateAccount(){
   return (
     <form className="form component" onSubmit={(event)=>{handleSubmit(event)}}>
       <h3 className="header">Add An Item</h3>
-      <div className="tooltip">
-        <label htmlFor="name">Name
-          <span className="tooltip">help?</span>
-          <span className="tooltip-text">a-z,A-Z,' only; 16 characters max</span>
-        </label>
-        <input type="text" id="name" name="item name" placeholder="Item name..." maxLength={16} /><br/>
-      </div>
+      <label htmlFor="name">Name
+        <span className="tooltip">help?</span>
+        <span className="tooltip-text">a-z,A-Z,' only; 16 characters max</span>
+      </label>
+      <input type="text" id="name" name="item name" placeholder="Item name..." maxLength={16} /><br/>
 
       <label htmlFor="description">Description</label>
       <input type="text" id="description" name="item description" placeholder="Description..." maxLength={1024} /><br/>

@@ -1,4 +1,5 @@
-const URL = 'http://127.0.0.1:5050'
+const base = 'http://127.0.0.1';
+const URL = base + ':5050'
 
 /**
  * Takes event target data and transforms it into a useable payload
@@ -131,7 +132,7 @@ export function build_Delete (payload){
  * @param {Object} request request parameters
  */
 export async function fetch_CreateUser(request){
-  fetch(`${URL}/users`,request)
+  return fetch(`${URL}/users`,request)
   .then(res => {
     if(res.status != 201){ throw new Error(res.statusText)}
     return true;
@@ -203,4 +204,13 @@ export async function fetch_DeleteItem(request, user){
     return true;
   })
   .catch(err => err);
+}
+
+export function fetch_Items(cb,user=null){
+  fetch(`${URL}/${!user?`items`:`users/${user}/items`}`, {
+    headers: {'access-control-allow-origin': base+':5173'}, credentials: 'include'
+  })
+  .then(res => res.json())
+  .then(json => cb(json))
+  .catch(err => console.error(err))
 }

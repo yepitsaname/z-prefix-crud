@@ -15,7 +15,7 @@ services:
     build: server/
     image: "api-server"
     volumes:
-      - "./server:/src/app"
+      - "./server:/src/server"
     container_name: api-container
     ports:
       - "5050:5050"
@@ -23,7 +23,7 @@ services:
       - database
     links:
       - database
-    command: sh -c "npm install -g knex && knex migrate:latest && knex seed:run && npm start"
+    command: sh -c "npm install -g knex && knex migrate:rollback && knex migrate:latest && knex seed:run && npm start"
 
   frontend:
     build: app/

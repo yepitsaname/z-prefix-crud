@@ -33,9 +33,9 @@ app.post('/login', async (req,res)=>{
         res.status(404).send();
       } else if(await compareHash(req.body.password, data[0].password)){
         const jwt = await genJWT(req.body.username, data[0].secret);
-        res.cookie('jwt_auth',jwt, { httpOnly: false, sameSite: 'none', secure: 'true', domain: 'localhost'})
+        res.cookie('jwt_auth',jwt, { httpOnly: false, sameSite: 'none', secure: 'true'})
         res.setHeader('access-control-allow-credentials','true')
-        res.setHeader('access-control-allow-origin','http://localhost:5173')
+        res.setHeader('access-control-allow-origin','http://127.0.0.1:5173')
         res.setHeader('access-control-allow-methods', 'POST, GET, PATCH, PUT, DELETE')
         res.setHeader('access-control-allow-headers','Origin, X-Requested-With, Content-Type, Accept, Authorization')
         res.status(200)
@@ -97,7 +97,7 @@ app.get('/users/:account/items', async (req,res)=>{
     .then( data => {
       res.status(200)
       res.setHeader('access-control-allow-credentials','true')
-      res.setHeader('access-control-allow-origin','http://localhost:5173')
+      res.setHeader('access-control-allow-origin','http://127.0.0.1:5173')
       res.setHeader('access-control-allow-methods', 'POST, GET, PATCH, PUT, DELETE')
       res.setHeader('access-control-allow-headers','Origin, X-Requested-With, Content-Type, Accept, Authorization')
       res.send(data)
@@ -137,7 +137,9 @@ app.post('/users/:account/items', (req,res)=>{
 })
 
 app.put('/users/:account/items', (req,res)=>{
+  console.log('what?')
   if(!req.cookies.jwt_auth ){ return res.status(401).send()}
+  console.log('how?')
   const keys = Object.keys(req.body);
   if(keys.length != 4){ return res.status(400).send('400 - Incorrect Number of Parameters')}
   if(

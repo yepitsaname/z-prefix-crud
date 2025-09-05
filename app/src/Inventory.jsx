@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import Item from "../components/Item";
 import AppContext from "./AppContext";
 import { useNavigate } from "react-router-dom";
+import { fetch_Items } from "../utils/forms";
 
 export default function Inventory(){
   const {user, name} = useContext(AppContext);
@@ -12,16 +13,12 @@ export default function Inventory(){
     if( user == null ){
       navigation('/')
     } else {
-      fetch(`http://localhost:5050/users/${user}/items`, {
-        headers:{'access-control-allow-origin': 'http://localhost:5173'}, credentials: 'include'})
-      .then(res => res.json())
-      .then(json => setItems(json))
-      .catch(err => console.error(err))
+      fetch_Items(setItems,user);
     }
   },[])
 
   return (
-    <div className="component">
+    <div className="component inventory">
       <h3 className="header">{name.first} Inventory</h3>
       {items.map(item=><Item key={item.item_id} item={item} />)}
     </div>

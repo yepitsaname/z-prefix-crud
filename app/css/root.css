@@ -83,8 +83,12 @@ body{
 
 #root{
   display: flex;
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
+}
+
+.inventory{
+  width: 100%;
 }
 
 .component{
