@@ -1,4 +1,5 @@
 FROM node:alpine
+RUN npm install -g knex
 RUN mkdir -p src/server
 WORKDIR /src/server
 COPY package*.json ./
