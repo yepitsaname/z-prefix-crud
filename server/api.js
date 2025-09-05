@@ -9,7 +9,7 @@ const {hash, compareHash, genJWT, decodeJWT} = require('./utils/auth');
 const app = express();
 app.use(cors(
   {
-    origin: 'http://localhost:5173',
+    origin: 'http://127.0.0.1:5173',
     credentials: true,
     methods: 'POST, GET, PATCH, PUT, DELETE',
   }
@@ -188,7 +188,7 @@ app.get('/items', (req,res)=>{
   .catch(err => res.send(err))
 })
 
-let server = app.listen(port, ()=>{console.log(process.env,`Listening on port ${port}`)});
+let server = app.listen(port, ()=>{console.log(`Listening on port ${port}`)});
 app.closeServer = () => {
   server.close();
 }

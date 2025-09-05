@@ -23,7 +23,7 @@ services:
       - database
     links:
       - database
-    command: sh -c "npm install && npm install -g knex && knex migrate:latest && npm start"
+    command: sh -c "npm install -g knex && knex migrate:latest && knex seed:run && npm start"
 
   frontend:
     build: app/

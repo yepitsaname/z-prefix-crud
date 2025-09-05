@@ -1,4 +1,4 @@
-const URL = 'http://localhost:5050'
+const URL = 'http://127.0.0.1:5050'
 
 /**
  * Takes event target data and transforms it into a useable payload
